@@ -36,7 +36,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -30, z: 0}
 --- !u!33 &3347566448532255734
 MeshFilter:
@@ -103,22 +103,13 @@ MonoBehaviour:
   restPosition: 0
   pressedPosition: 45
   hitStrength: 10000
-  flipperDamper: 150
-  isLeftFlipper: 0
-  leftFlipper:
-    m_Name: Left Flipper
+  flipperDamper: 100
+  padState: 1
+  flipperAction:
+    m_Name: Flipper
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 06c1d581-5a97-478a-979a-ba4a209affaa
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  rightFlipper:
-    m_Name: Right Flipper
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: dc362e08-2ae8-42ed-993e-8b4b7cb50c3c
+    m_Id: d477d715-2779-4a96-b2e1-ada5943032f2
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []

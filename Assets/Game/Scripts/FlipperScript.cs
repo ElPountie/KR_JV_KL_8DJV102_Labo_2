@@ -1,7 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
+public enum PadState
+{
+    Left,
+    Right,
+    Other
+}
 
 public class FlipperScript : MonoBehaviour
 {
@@ -9,14 +14,12 @@ public class FlipperScript : MonoBehaviour
     public float pressedPosition = 45f;
     public float hitStrength = 10000f;
     public float flipperDamper = 150f;
-    public bool isLeftFlipper;
+    public PadState padState;
 
     public PlayerInputActions InputAction;
-    public InputAction leftFlipper;
-    public InputAction rightFlipper;
+    public InputAction flipperAction;
 
     HingeJoint hinge;
-
 
     private void Awake()
     {
@@ -25,32 +28,27 @@ public class FlipperScript : MonoBehaviour
 
     private void OnEnable()
     {
-        if (isLeftFlipper)
+        if (padState == PadState.Left)
         {
-            leftFlipper = InputAction.Player.LeftFlipper;
-            leftFlipper.Enable();
-            leftFlipper.started += LeftFlipperActionStarted;
-            leftFlipper.canceled += LeftFlipperActionCanceled;
+            flipperAction = InputAction.Player.LeftFlipper;
         }
-        else
+        else if (padState == PadState.Right)
         {
-            rightFlipper = InputAction.Player.RightFlipper;
-            rightFlipper.Enable();
-            rightFlipper.started += RightFlipperActionStarted;
-            rightFlipper.canceled += RightFlipperActionCanceled;
+            flipperAction = InputAction.Player.RightFlipper;
         }
+        else if (padState == PadState.Other)
+        {
+            flipperAction = InputAction.Player.OtherPad;
+        }
+
+        flipperAction.Enable();
+        flipperAction.started += OnFlipperActionStarted;
+        flipperAction.canceled += OnFlipperActionCanceled;
     }
-    
+
     private void OnDisable()
     {
-        if (isLeftFlipper)
-        {
-            leftFlipper.Disable();
-        }
-        else
-        {
-            rightFlipper.Disable();
-        }
+        flipperAction.Disable();
     }
 
     private void Start()
@@ -59,55 +57,23 @@ public class FlipperScript : MonoBehaviour
         hinge.useSpring = true;
     }
 
-    public void RightFlipperActionStarted(InputAction.CallbackContext context)
+    private void OnFlipperActionStarted(InputAction.CallbackContext context)
     {
-        if (!isLeftFlipper)
-        {
-            JointSpring spring = new JointSpring();
-            spring.spring = hitStrength;
-            spring.damper = flipperDamper;
-            spring.targetPosition = pressedPosition;
-            hinge.spring = spring;
-            hinge.useLimits = true;
-        }
+        ApplySpringSettings(pressedPosition);
     }
 
-    public void RightFlipperActionCanceled(InputAction.CallbackContext context)
+    private void OnFlipperActionCanceled(InputAction.CallbackContext context)
     {
-        if (!isLeftFlipper)
-        {
-            JointSpring spring = new JointSpring();
-            spring.spring = hitStrength;
-            spring.damper = flipperDamper;
-            spring.targetPosition = restPosition;
-            hinge.spring = spring;
-            hinge.useLimits = true;
-        }
+        ApplySpringSettings(restPosition);
     }
 
-    public void LeftFlipperActionStarted(InputAction.CallbackContext context)
+    private void ApplySpringSettings(float targetPosition)
     {
-        if (isLeftFlipper)
-        {
-            JointSpring spring = new JointSpring();
-            spring.spring = hitStrength;
-            spring.damper = flipperDamper;
-            spring.targetPosition = pressedPosition;
-            hinge.spring = spring;
-            hinge.useLimits = true;
-        }
-    }
-
-    public void LeftFlipperActionCanceled(InputAction.CallbackContext context)
-    {
-        if (isLeftFlipper)
-        {
-            JointSpring spring = new JointSpring();
-            spring.spring = hitStrength;
-            spring.damper = flipperDamper;
-            spring.targetPosition = restPosition;
-            hinge.spring = spring;
-            hinge.useLimits = true;
-        }
+        JointSpring spring = new JointSpring();
+        spring.spring = hitStrength;
+        spring.damper = flipperDamper;
+        spring.targetPosition = targetPosition;
+        hinge.spring = spring;
+        hinge.useLimits = true;
     }
 }

@@ -44,6 +44,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OtherPad"",
+                    ""type"": ""Button"",
+                    ""id"": ""0823b40f-cc60-417b-bdbf-c1f07fb92e2f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -66,6 +75,28 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""LeftFlipper"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7ac2a9fa-13ff-41c3-b323-8753a4710c20"",
+                    ""path"": ""<Keyboard>/o"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OtherPad"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f87f59d4-4dc7-45cb-97a4-01686c8f8c61"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OtherPad"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -655,6 +686,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_RightFlipper = m_Player.FindAction("RightFlipper", throwIfNotFound: true);
         m_Player_LeftFlipper = m_Player.FindAction("LeftFlipper", throwIfNotFound: true);
+        m_Player_OtherPad = m_Player.FindAction("OtherPad", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -730,12 +762,14 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_RightFlipper;
     private readonly InputAction m_Player_LeftFlipper;
+    private readonly InputAction m_Player_OtherPad;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
         public PlayerActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @RightFlipper => m_Wrapper.m_Player_RightFlipper;
         public InputAction @LeftFlipper => m_Wrapper.m_Player_LeftFlipper;
+        public InputAction @OtherPad => m_Wrapper.m_Player_OtherPad;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -751,6 +785,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @LeftFlipper.started += instance.OnLeftFlipper;
             @LeftFlipper.performed += instance.OnLeftFlipper;
             @LeftFlipper.canceled += instance.OnLeftFlipper;
+            @OtherPad.started += instance.OnOtherPad;
+            @OtherPad.performed += instance.OnOtherPad;
+            @OtherPad.canceled += instance.OnOtherPad;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -761,6 +798,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @LeftFlipper.started -= instance.OnLeftFlipper;
             @LeftFlipper.performed -= instance.OnLeftFlipper;
             @LeftFlipper.canceled -= instance.OnLeftFlipper;
+            @OtherPad.started -= instance.OnOtherPad;
+            @OtherPad.performed -= instance.OnOtherPad;
+            @OtherPad.canceled -= instance.OnOtherPad;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -945,6 +985,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     {
         void OnRightFlipper(InputAction.CallbackContext context);
         void OnLeftFlipper(InputAction.CallbackContext context);
+        void OnOtherPad(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
