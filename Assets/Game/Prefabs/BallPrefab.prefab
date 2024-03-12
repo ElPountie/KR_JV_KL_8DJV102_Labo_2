@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4701660450247538596}
   m_Layer: 0
   m_Name: BallPrefab
-  m_TagString: Untagged
+  m_TagString: PinBall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33,7 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &214719178741723164
 MeshFilter:
@@ -92,7 +92,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7634236811728990400}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 9dec2e5124a1ff242968657f0a494785, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
