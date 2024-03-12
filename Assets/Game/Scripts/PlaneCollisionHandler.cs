@@ -8,7 +8,7 @@ public class PlaneCollisionHandler : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         // Check if the collision is with the ball
-        if (collision.gameObject.CompareTag("Ball"))
+        if (collision.gameObject.CompareTag("PinBall"))
         {
             Rigidbody ballRigidbody = collision.gameObject.GetComponent<Rigidbody>();
             if (ballRigidbody != null)
