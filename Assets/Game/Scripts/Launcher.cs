@@ -36,6 +36,8 @@ public class Launcher : MonoBehaviour
     }
     private void OnDisable()
     {
+        LaunchAction.started -= OnLaunchActionStarted;
+        LaunchAction.canceled -= OnLaunchActionCanceled;
         LaunchAction.Disable();
     }
 

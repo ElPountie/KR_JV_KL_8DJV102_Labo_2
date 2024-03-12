@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
-    public int score = 0;
-
+    int score = 0;
     public void AddScore(int points)
     {
         score += points;
@@ -14,5 +13,10 @@ public class ScoreManager : MonoBehaviour
     public void ResetScore()
     {
         score = 0;
+    }
+
+    public int GetScore()
+    {
+        return score;
     }
 }

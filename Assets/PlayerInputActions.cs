@@ -62,6 +62,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MultiBall"",
+                    ""type"": ""Button"",
+                    ""id"": ""46eb9e9d-2013-47e0-94b3-540f14d5aabb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -117,6 +126,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""LaunchBall"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8877ed5b-8a36-4403-8b21-72913e68ed6e"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MultiBall"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -708,6 +728,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_LeftFlipper = m_Player.FindAction("LeftFlipper", throwIfNotFound: true);
         m_Player_OtherPad = m_Player.FindAction("OtherPad", throwIfNotFound: true);
         m_Player_LaunchBall = m_Player.FindAction("LaunchBall", throwIfNotFound: true);
+        m_Player_MultiBall = m_Player.FindAction("MultiBall", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -785,6 +806,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_LeftFlipper;
     private readonly InputAction m_Player_OtherPad;
     private readonly InputAction m_Player_LaunchBall;
+    private readonly InputAction m_Player_MultiBall;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -793,6 +815,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @LeftFlipper => m_Wrapper.m_Player_LeftFlipper;
         public InputAction @OtherPad => m_Wrapper.m_Player_OtherPad;
         public InputAction @LaunchBall => m_Wrapper.m_Player_LaunchBall;
+        public InputAction @MultiBall => m_Wrapper.m_Player_MultiBall;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -814,6 +837,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @LaunchBall.started += instance.OnLaunchBall;
             @LaunchBall.performed += instance.OnLaunchBall;
             @LaunchBall.canceled += instance.OnLaunchBall;
+            @MultiBall.started += instance.OnMultiBall;
+            @MultiBall.performed += instance.OnMultiBall;
+            @MultiBall.canceled += instance.OnMultiBall;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -830,6 +856,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @LaunchBall.started -= instance.OnLaunchBall;
             @LaunchBall.performed -= instance.OnLaunchBall;
             @LaunchBall.canceled -= instance.OnLaunchBall;
+            @MultiBall.started -= instance.OnMultiBall;
+            @MultiBall.performed -= instance.OnMultiBall;
+            @MultiBall.canceled -= instance.OnMultiBall;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1016,6 +1045,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnLeftFlipper(InputAction.CallbackContext context);
         void OnOtherPad(InputAction.CallbackContext context);
         void OnLaunchBall(InputAction.CallbackContext context);
+        void OnMultiBall(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
