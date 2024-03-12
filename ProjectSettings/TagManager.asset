@@ -7,6 +7,7 @@ TagManager:
   - PinBall
   - Ground
   - BumperAdd
+  - Door
   layers:
   - Default
   - TransparentFX
