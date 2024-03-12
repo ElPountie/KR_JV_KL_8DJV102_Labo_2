@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 1485748821530269013}
   - component: {fileID: 4701660450247538596}
   - component: {fileID: 6959611612197701351}
+  - component: {fileID: 2559825178092154363}
+  - component: {fileID: 9036953754697745301}
   m_Layer: 0
   m_Name: BallPrefab
   m_TagString: PinBall
@@ -34,7 +36,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &214719178741723164
 MeshFilter:
@@ -146,3 +148,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63b2cca14794e134c94ebb743291eaf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2559825178092154363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7634236811728990400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fed41f7a51a75c45b47ee0391f6cb65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialMaterial: {fileID: 2100000, guid: 3b01a071da4857544b9a3ecb55bad3ab, type: 2}
+--- !u!114 &9036953754697745301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7634236811728990400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 763768416649a2344b3a684d9a8d1cee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballPrefab: {fileID: 7634236811728990400}
+  startPosition: {x: -3.883, y: 0.54, z: 5.313}
