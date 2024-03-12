@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PinBall
   - Ground
+  - BumperAdd
   layers:
   - Default
   - TransparentFX
