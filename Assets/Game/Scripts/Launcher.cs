@@ -54,7 +54,6 @@ public class Launcher : MonoBehaviour
             if (transform.position.z <= initPos.z)
             {
                 rb.velocity = Vector3.zero;
-                Debug.Log(rb.velocity);
                 transform.position = initPos;
                 launched = false;
             }
