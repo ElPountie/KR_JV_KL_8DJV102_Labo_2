@@ -62,7 +62,6 @@ public class GameManager : MonoBehaviour
             nbBall = 0;
         }
         MainMenu.HideMenu();
-        MainMenu.gameObject.SetActive(false);
         Instantiate(ballPrefab, ballPosition, Quaternion.identity);
         nbBall++;
     }
