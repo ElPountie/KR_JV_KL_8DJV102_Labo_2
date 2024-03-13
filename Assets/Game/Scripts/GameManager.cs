@@ -11,8 +11,9 @@ public class GameManager : MonoBehaviour
     ScoreManager scoreManager;
     BestScoreManager bestScoreManager;
     public GameObject ballPrefab;
-    public PlayerInputActions InputAction;
-    public InputAction MultiBallAction;
+    PlayerInputActions InputAction;
+    InputAction MultiBallAction;
+    InputAction PauseGameAction;
     public Vector3 ballPosition;
     public float ballOffset = 0.3f;
     int nbBall = 0;
@@ -26,15 +27,21 @@ public class GameManager : MonoBehaviour
     private void OnEnable()
     {
         MultiBallAction = InputAction.Player.MultiBall;
+        PauseGameAction = InputAction.Player.Pause;
 
         MultiBallAction.Enable();
         MultiBallAction.started += setMultiBall;
+
+        PauseGameAction.Enable();
+        PauseGameAction.started += PauseGame;
     }
 
     private void OnDisable()
     {
         MultiBallAction.started -= setMultiBall;
+        PauseGameAction.started -= PauseGame;
         MultiBallAction.Disable();
+        PauseGameAction.Disable();
     }
     void Start()
     {
@@ -74,6 +81,18 @@ public class GameManager : MonoBehaviour
         }
         MainMenu.showScore(scoreManager.GetScore());
         scoreManager.ResetScore();
+    }
+
+    void PauseGame(InputAction.CallbackContext context)
+    {
+        if (Time.timeScale == 0)
+        {
+            Time.timeScale = 1;
+        }
+        else
+        {
+            Time.timeScale = 0;
+        }
     }
 
     void askName()
