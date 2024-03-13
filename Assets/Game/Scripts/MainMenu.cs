@@ -56,6 +56,7 @@ public class MainMenu : MonoBehaviour
         ScoreMenu.SetActive(true);
         mainMenuPanel.SetActive(false);
         Image.SetActive(false);    
+        UpdateScore(0);
     }
 
 
