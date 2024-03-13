@@ -117,7 +117,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void AddBall()
+    public void AddBall()
     {
         nbBall++;
     }
