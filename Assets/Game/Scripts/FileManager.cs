@@ -37,9 +37,9 @@ public static class FileManager
                 result = "";
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                Debug.LogError($"Failed to read from {fullPath} with exception {e}");
+                Debug.LogError($"Failed to read from {fullPath} with exception {a}");
                 result = "";
                 return false;
             }

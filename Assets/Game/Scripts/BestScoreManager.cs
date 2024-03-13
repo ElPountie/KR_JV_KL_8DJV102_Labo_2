@@ -38,7 +38,7 @@ public class BestScoreManager : MonoBehaviour
         return m_BestScores;
     }
 
-    public void AddScore(string name, int score)
+    public bool AddScore(string name, int score)
     {
         for (int i = 0; i < 5; i++)
         {
@@ -49,9 +49,10 @@ public class BestScoreManager : MonoBehaviour
                 scoreData.Score = score;
                 m_BestScores.ScoresData.Insert(i, scoreData);
                 m_BestScores.ScoresData.RemoveAt(5);
-                break;
+                SaveScore();
+                return true;
             }
         }
-        SaveScore();
+        return false;
     }
 }

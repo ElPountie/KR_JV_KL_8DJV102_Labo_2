@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class GameManager : MonoBehaviour
 {
     MainMenu MainMenu;
     ScoreManager scoreManager;
+    BestScoreManager bestScoreManager;
     public GameObject ballPrefab;
     public PlayerInputActions InputAction;
     public InputAction MultiBallAction;
@@ -38,6 +40,7 @@ public class GameManager : MonoBehaviour
     {
         MainMenu = GameObject.FindObjectOfType<MainMenu>();
         scoreManager = GameObject.FindObjectOfType<ScoreManager>();
+        bestScoreManager = GameObject.FindObjectOfType<BestScoreManager>();
     }
 
     public void StartGame()
@@ -51,14 +54,38 @@ public class GameManager : MonoBehaviour
             }
             nbBall = 0;
         }
+        MainMenu.HideMenu();
         MainMenu.gameObject.SetActive(false);
         Instantiate(ballPrefab, ballPosition, Quaternion.identity);
+        nbBall++;
     }
 
     void EndGame()
     {
         MainMenu.gameObject.SetActive(true);
+
+        for (int i = 0; i < 5; i++)
+        {
+            if (scoreManager.GetScore() > bestScoreManager.getBestScore().ScoresData[i].Score)
+            {
+                askName();
+                return;
+            }
+        }
         MainMenu.showScore(scoreManager.GetScore());
+        scoreManager.ResetScore();
+    }
+
+    void askName()
+    {
+        MainMenu.InputMenu.SetActive(true);
+    }
+
+    public void SaveScore(string name)
+    {
+        int score = scoreManager.GetScore();
+        bestScoreManager.AddScore(name, score);
+        MainMenu.showScore(score);
         scoreManager.ResetScore();
     }
 

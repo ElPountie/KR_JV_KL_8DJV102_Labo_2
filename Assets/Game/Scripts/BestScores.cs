@@ -22,5 +22,13 @@ public class BestScores
     public void LoadFromJson(string a_Json)
     {
         JsonUtility.FromJsonOverwrite(a_Json, this);
+
+        while (ScoresData.Count < 5)
+        {
+            ScoreData scoreData = new ScoreData();
+            scoreData.Name = "AAA";
+            scoreData.Score = 0;
+            ScoresData.Add(scoreData);
+        }
     }
 }
