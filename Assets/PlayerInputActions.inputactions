@@ -42,6 +42,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "MultiBall",
+                    "type": "Button",
+                    "id": "46eb9e9d-2013-47e0-94b3-540f14d5aabb",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Shake",
                     "type": "Button",
                     "id": "13373756-6c45-4cde-ad59-05086afeb8f6",
@@ -104,6 +113,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "LaunchBall",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8877ed5b-8a36-4403-8b21-72913e68ed6e",
+                    "path": "<Keyboard>/g",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MultiBall",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
